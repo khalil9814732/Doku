@@ -1,0 +1,15 @@
+docker run --name postgres_kartoza  --restart on-failure -e POSTGRES_USER=docker  -e POSTGRES_PASS=docker  -e POSTGRES_MULTIPLE_EXTENSIONS=postgis,pgrouting  -p 25433:5432 -d kartoza/postgis
+
+*******Backup
+
+** How to set mount value of a container in local file
+
+-v /our/local/path:/var/lib/postgresql 
+or 
+-v /our/local/path:/var/lib/postgresql/data
+
+** How to use Volum of a container in another container 
+   --volumes-from="Copntainer_Name"
+
+## Geoserver docker 
+docker run  --name=geoserver_8085  -p 8085:8080  -d  -v /home/extispac/gherbran/Khalil_Fies/geoserver_data:/opt/geoserver/data_dir -e "GEOSERVER_LOG_LOCATION=/opt/geoserver/data_dir/logs/geoserver_8085.log"  -t iwo/geoserver
