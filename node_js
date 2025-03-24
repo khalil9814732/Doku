@@ -1,0 +1,290 @@
+
+///////////////////////////////////////////////////////////////
+//// How to run a js code using node ++
+//node AudioParamMap.js
+
+////Global object von node js (prototype)
+global.console.log('')
+// Global object von Browser(prototype)
+window.console.log('')
+console.log('test')
+//////////////////////////////////////////////////////////////////////////////////////////
+//// Module in Node js ++
+//Was ist Module es ist eine java script File 
+// Innerhalb von jede Module wir haben eine Objekt, die unserer Module beschreibt
+console.log(Module)
+// Die Function, die wir innerhalb von eine Module geschrieben haben, nur innerhalb das Module erreichbar ist,
+// Wenn wir die in andere Module benutzen wollen mmüssen wir die Function exportieren
+function addition(a,b){
+    return a+b
+}
+           //index      //was wir exportieren wollen
+module.exports={
+    addition
+}
+
+// Wie kann ich die Function von eine Module in andere Module erreichen #
+      // Exportete Function in andere Module     //Pfade von Module, die wir importieren wollen
+const {addition,subtraction} = require('./calculator')
+
+//////////////////////////////////////////////////////////////////////////////////////
+//// Node Js  native Modules ++
+
+//path Module Es wird für Adressen benutzt Pathes
+const path = require('path');
+let parePath = path.parse(__filename);
+console.log(parePath);
+
+//OS Module  Es gibt uns Info über Operation System
+const os = require('os')
+console.log(`free Memory is =  ${os.freemem}`)
+console.log(`total Memory is =  ${os.totalmem}`)
+
+// fs file System
+
+const fs = require('fs')
+// asyc und blockabele         // The path of our Files
+files = fs.readdirSync('./')
+console.log(files)
+
+// oder unblockable
+const fs = require('fs')
+fs.readdir('./',(err, files)=>{
+    console.log(err)
+    console.log(files)
+
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+////events ++
+//Es besteht aus zwei Teils call a function und was soll gemacht werden  ++
+// Es gibt ein Class zurück
+const EventEmmiter = require('events')
+const emmiter = new EventEmmiter()
+
+// Was soll nach Aufruf von event gemacht werden(Call back)
+emmiter.on('bell',(e)=>{
+    console.log(e.time)
+    console.log(e.count)
+    console.log('Open the door')
+})
+// Call
+emmiter.emit('bell',{time:Date.now(), count:3})
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//// http Module ++
+
+// http Create Server
+const http = require('http')
+// Wenn jemand auf unser Port kommt was soll gemacht werden
+// req ist eine Objekt, die ein bisschen Info über die Request hat z.B URL von request
+// res ist eine Objekt, die hat Info über die Antwort von Server
+const server = http.createServer((req, res)=>{
+    console.log('Server ist aufgerufen')
+    console.log(req.url)
+    res.write('response')
+    res.end()
+})
+// auf welchr Port sind wir erreichbar
+server.listen('3000')
+
+// http Create Routing
+const http = require('http')
+
+const server_1 = http.createServer((req, res)=>{
+    if (req.url=== '/'){
+        res.write('HOME PAGE')
+
+    }else if (req.url === '/geo'){
+        res.write('GOEKODER')
+    }else{
+        res.write('NOT FUND')
+    }
+    res.end()
+})
+server_1.listen('3000')
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//// npm ++
+
+//damit kann man js package zu inistallieren 
+
+// package.json ----> es hat alle Infos über unser App 
+// npm init   oder npm init -y(mit y es erstellt keine Frage)  ----> Es wird Package.json erstellen
+
+// Installetion of External packages
+// npm i moment-jalali(package_name)         ---> Es wird unter packages.json und dic dependancy hinzugefügt
+
+//Depandecsy
+// 1- Normale Depandancies  npm i package_name        ---> für Application sind notwendig  s
+// 2- DEV Depandancies      npm i package_name  --save-dev    ---> Die sind nicht für app notwendig und nur für developer sind die 
+
+// Unstall Packages
+// npm un Package_name
+
+// Check ob unser Skript korrekt ist für dass kann man die Module jshint benutzen alles dev package
+// jshint app.js (Skript die wir checken wollen)
+
+// GLOBAL installieren, -g
+
+// Wie kann ich eine external Package importieren
+const moment = require('moment-jalali')
+const { append } = require('express/lib/response')
+const time = moment(new Date()).locale('fa').format('YYYY/MM/DD')
+console.log(time)
+
+// Node_Modules Folder hat info von alle externalle Packages, die wir inistalliert haben. 
+// Wenn wir das Skript an unser Kollegen weiter geben, er kann mit "npm i oder npm install" alles installieren
+
+// npm list --depth=0 zeigt uns nur Packages, die wir intalliert haben
+//npm list            zeigt uns nur alle Packages, die wir intalliert haben und dependancies
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//API++
+
+// "Rest API"  es ist eine Endpoint, die kann CRUD, Create(post), Read(get), Update(put) Delete 
+
+// "Express"   Damit kann man eine API Schreiben
+// npm i express 
+
+
+// eine Einface API
+const express =require('express')
+const app = express()
+
+app.get('/',(req,res)=>{
+    res.send('Send Hello Express')
+
+})
+      // Es schickt eine JSON zurück
+app.get('/geo',(req,res)=>{
+    res.send([{id:1, name:'Khalil'},{id:2, name:'Karim'}])
+
+})
+
+    //if PORT Number in enviroment Variabels definiert wird das sonst 3000
+port = process.env.PORT || 3000
+app.listen(3000, ()=>{console.log(`it listen to ${port}`)})
+
+//// How to get a parameter from User 
+
+// durch params
+url_inbrowsers='datavm01hw.versatel.local:3000/api/users/1'
+app.get('/api/users/:id',(req,res)=>{
+    res.send(req.params.id)
+  
+
+})
+// durch params  users ist a json file
+const users= require('./users')
+app.get('/api/users/:id',(req,res)=>{
+   
+    const user = users.find((u)=> u.id==req.params.id);
+    if (!user) return res.status(404).json({data:[],message:'Die id not found'})
+    res.json({data: user, message:'ok'})
+
+})
+// durch query string
+url_inbrowsers='datavm01hw.versatel.local:3000/api/users?id=10&name=Khalil'
+ap.get('/api/users',(req,res)=>{
+    console.log(req.query)
+})
+
+// post 
+app.use(express.json())
+app.post('/api/users',(req,res)=>{
+    res.json('in developong ....')
+})
+
+// post validator ---------> Die Data, die wir von User erhalten, muss validiert werden.
+ //npm i express-validator
+ //const {body,express_vadidation} = require('express-validator')
+ app.post('/api/users',[
+     // was muss gecheckt werden
+    body('email','Email musst be valid').isEmail(),
+    body('first_name','First Name musst nor be empty').notEmpty()
+
+],(req,res)=>{
+    const errors = express_vadidation(req)
+    // if errors is not empty, dann wird es aufhören 
+    if( ! errors.isEmpty()){return res.status('400').json({data:null, error:errors.array(), message:'please make it complete'})}
+    res.send(req.body)
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//// nodemon pachage      ---> Mit diesem Package braucht man nicht server nochmal starten
+  // npm i nodemon -g    ---> muss global installiert werden  
+  // nodemon app(unser_file.js)
+
+
+//// envirement Variables ...........> process.env.PORT zB
+// set a envirement varaible    set PORT = 5000
+// delete a env Variable set PORT= 
+
+//// Middleware
+
+app.use((req,res,next)=>{
+    console.log('mid1')
+    //res.send('midd1')
+    next()
+})
+
+// morgan 
+// Damit kann man es verfolgen was für eine http requests zur meine Server gekommen
+const morgan = require('morgan')
+app.use(morgan('tiny'))
+
+// view engine
+// npm i ejs
+app.set('view engine','ejs')
+                  // folder von unser views
+app.set('views','./views')
+app.get('/',(req,res)=>{
+                // html file
+                            // kann man auch eine variable mit schicken
+    res.render('home',{name:'Khalil'}) //---> // <h1> Hallo <%=  name %> </h1> in ejs file kann man variable so lesen
+  
+    res.send('hello')
+})
+
+
+// Routes Folder
+// für jeder Route File braucht man diese Structur das ist home.js
+const express = require('express')
+router = express.Router()
+
+
+router.get('/',(req,res)=>{
+    res.render('home',{name:'DA'})
+    res.send('hello')
+})
+
+
+module.exports=router
+
+// roue file sollte in app File required werden
+const homeRouter = require('./routes/home')
+app.use('/',homeRouter)
+
+
+//postgresql in express
+// npm i pg
+const {Client} = require('pg')
+const client = new Client({
+    host:'datavm01hw.versatel.local',
+    user:'datalab',
+    port:25434,
+    password:'data#lab',
+    database:'dba'
+
+})
+client.connect()
+client.query('SELECT * FROM c5gc.c5gc_line',(err,res)=>{
+    if(!err){
+        console.log(res.rows)
+    }else{
+        console.log(err.message)
+    }
+    client.end
+})
