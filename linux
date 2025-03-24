@@ -1,0 +1,105 @@
+-- Wie kann ich eine Server verbinden
+
+	ssh   user@url 
+
+-- List all Files
+	ls  
+	ls -l
+	ls -al   -> Für Hiden Stafs
+
+-- Print working Directory
+	pwd
+
+-- Change Directory 
+	cd 
+-- Create a File 
+	touch file.txt 
+	touch file_1 file_2   -> mehr als 1 file 
+	touch linode{1..10}  -> 
+
+-- Print Something
+	echo "Hello World"
+	echo test >test --------> it will write sth in file "test"
+
+-- write in a File 
+	nano File name 
+	ctrl x y Enter--> to save nano File 
+-- Edite a File 
+	vim File Name 
+	i to insert a text 
+	escape :wq  to save 
+
+-- To Read a File Name 
+	cat File Name --> Es wird die text in File printen
+	lese
+	tail 
+	head
+-- To make Text of a File unreadable 
+	shred File Name 
+
+
+-- Make a Directory
+	mkdir Directory-Name
+
+-- How to copy or move a file or delete 
+	cp   file name  /distance    to copy
+	mv  file name /distance     to move a file 
+	rm to delete 
+
+ -- How to remove a direktory
+	--rmdir path  
+	rm -r path     ->wenn die Directory nicht empty ist 
+-- Name von Benutzer 
+	woami
+
+-- Add User 
+	useradd Username
+	sudo useradd UserName
+-- Change the User
+	-- su  
+
+-- Wie kann ich nicht mehr a Benutzer sein 
+	exit
+
+-- Install a Package 
+--sudo apt install PackageName 
+
+-- Wie kann ich etwas vom Internet herunterladebn
+	wget url 
+ 	curl url 
+-- Unzipp a File
+	unzip te.zip 
+	zip to make zip 
+-- Compare a File
+	cmp file_1 file_2
+-- to Find a File 
+	find  /name of File 
+	locate 
+-- to get IP
+	ifconfig
+	ip address
+-- Hoe to get characters of Server 
+	uname -a
+
+-- to check free Mem 
+	free
+	df  -H 
+-- to check cpu status 
+	top oder htop 
+
+-- stop a Process 
+	kill process-id
+	pkill -f name of process 
+
+-- to stop Services 
+	systemctl stop /start / restart service Names 
+-- history of Commands 
+	history 
+-- reboot oder shotdown 
+	 reboot --> to reboot server 
+	shotdown --> to shotdown server 
+
+-- To check welche Ports von wem verwendet wird :
+	netstat - tunlp 
+	ss -tunlp
+	nmap es muss installiert werden 
