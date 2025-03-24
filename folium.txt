@@ -1,0 +1,151 @@
+Install Folium
+conda install folium
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Create a Basemap and save it in a html file
+m = folium.Map(location=[Longitude,Latitude], tiles='OpenStreetMap', zoom_start=10, zoom_control=True(scale))
+m.save('path tf our output .html')
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Add a marker to our Basemap
+
+m = folium.Map(location=[Longitude,Latitude], tiles='OpenStreetMap', zoom_start=10, zoom_control=True(scale))
+folium.Marker(location=[48,2], popup='hello', tooltip='click her', icon=folium.Icon(color='blue', icon='cloud')).add_to(m)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Create Marker from a external file
+df = pd.read_excel('C:\\Users\\ICH\Desktop\\1&1\\Leipzig_Antennen.xlsx')
+m = folium.Map(location=[51,12], tiles='OpenStreetMap', zoom_start=10, zoom_control=True)
+
+for i, row in df.iterrows():
+    folium.Marker(location=[row['Latitude'],row['Longitude']], popup=row['Address'], tooltip='clickher', icon=folium.Icon(color='blue', icon='cloud')).add_to(m)
+
+  or
+for i, row in df.iterrows():
+    
+	Longitude =df.at[i, 'Longitude']
+	Latitude =df.at[i, 'Latitude']
+	Address = df.at[i, 'Address']
+	folium.Marker(location=[Latitude,Longitude], popup=Address, tooltip='clickher', icon=folium.Icon(color='blue')).add_to(m) 
+
+m.save('C:\\Users\\ICH\Desktop\\1&1\\test.html')
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Create popup --> column that are integer musst be convertet to str()
+
+for i, row in df.iterrows():
+    popup_blue ='<img src="C:/Users/Omrani/PycharmProjects/pythonProject7/antenne_blue.png" width=220, height =100>'+'<hr>'+ '<a style="color: red">ObjectID: </a>'+str(df.at[index, 'OBJECTID']) + '<hr>' + '<a style="color: red">Adress: </a>'+str(df.at[index, 'Address'])
+    folium.Marker(location=[row['Latitude'],row['Longitude']], popup=popup, tooltip='clickher', icon=folium.Icon(color='blue', icon='cloud')).add_to(m)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Create MarkerCluster (we need to import MarkerCluster using "from folium.Plugins import MarkerCluster")
+
+m = folium.Map(location=[51,12], tiles='OpenStreetMap', zoom_start=10, zoom_control=True)
+markercluster = MarkerCluster().add_to(m)
+folium.Marker(location=[48,2], popup='hello', tooltip='click her', icon=folium.Icon(color='blue', icon='cloud')).add_to(markercluster)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** How to get Basemap url  --> tiles and attr are importent
+
+* we search for "leaflet basemap"
+
+m = folium.Map(location=[51,12], tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',attr='My Data Attribution' , zoom_start=10, zoom_control=True)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Display GeoJson Data using Folium 
+
+getJson = r"path to our json file"
+m = folium.Map(location=[51,12], tiles='OpenStreetMap', zoom_start=10, zoom_control=True)
+g = folium.GeoJson(
+
+	getJson,
+	name= 'geojson'
+
+
+).add_to(m)
+
+* add tooltip to geojson file
+folium.GeoJsonToolTip(fields=["Name"]).add_to(g)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Create custom marker icon
+
+
+m = folium.Map(location=[51,12], tiles='OpenStreetMap', zoom_start=10, zoom_control=True)
+logoIcon = folium.features.CustomIcon('path to our image', size=(50,50))
+
+folium.Marker(location=[], popup='', tooltip='', icon=folium.features.CustomIcon('path to our image', size=(50,50))).add_to(m)
+
+--------------------------------------------------------.-------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Create Circle marker 
+folium.CircleMarker(location=[], radius=50, color='red', fill_color='green', popup='', tooltip='').add_to(m)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** How to use "os" to reach  a folder 
+
+import os
+
+path = os.path.join('path', 'data.xlsx')
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ** Controllers
+* Vector layers
+
+fg = folium.FeatureGroup(name="Kir Khar").............> it creates a Feature group only for vector data
+m = folium.Map(location=[51,12], tiles='Base Map' , zoom_start=10, zoom_control=True)------< Base Map
+for i, row in df.iterrows():
+    fg.add_child(folium.Marker(location=[row['Latitude'],row['Longitude']])) --> it adds vector data to base map
+
+
+m.add_child(fg)..........> it add Feature group to base map
+m.add_child(folium.LayerControl())----------> add layers control to base map
+
+* Selection possibility for Tiles
+
+m = folium.Map(location=[51,12] , zoom_start=10, zoom_control=True)-----------> Base Map
+
+folium.raster_layers.TileLayer('Open Street Map').add_to(m)
+folium.raster_layers.TileLayer('Stamen Terrain').add_to(m) --------------------> TILES
+folium.raster_layers.TileLayer('Stamen Toner').add_to(m)
+
+m.add_child(folium.LayerControl()) -------------------> add layers control to base map
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Folium Clustering
+
+import folium
+from folium.plugins import MarkerCluster
+ 
+
+m = folium.Map(location=[37.370000,-122.050000], tiles='OpenStreetMap', zoom_start=5, zoom_control=True)
+marker_cluster = MarkerCluster(
+    name="clustered name",
+).add_to(m)
+
+# path of dataframe
+df = pd.read_csv('path of Dataframe')
+
+ 
+for row in df.itertuples():
+    #print(row)
+    folium.Marker(location=[row.latitude,row.longitude],popup=row.population,tooltip='clickher').add_to(marker_cluster)
+
+
+
+m.save('sample_data/index_final1.html')
+
+
+
+
+
+
