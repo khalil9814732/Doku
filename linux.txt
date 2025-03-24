@@ -2,6 +2,7 @@ Linux ist der Kernel
 die Sachen wie 
 -- Ubuntu 
 -- Redhat 
+-- dbian 
 sind einfach was von Linux weiter entwickelt wurde. 
 
 
