@@ -1,0 +1,246 @@
+import pandas as pd
+import geopandas as gpd
+import matplotlib.pyplot as plt
+from shapely.geometry import Point
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** How to install geopandas
+* first download following libraries based on python version:        GDAL, pyproj, fiona, shapely, geopandas from following link:
+https://www.lfd.uci.edu/~gohlke/pythonlibs/
+*install using pip install "file name"
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** How to get charachters of a dataframe oder geodataframe 
+* head()---------> to get a limitet number of rows of a dataframe or geodataframe
+* columns--------> to get list of columns of a dataframe or geodataframe
+* crs------------> to get crs of a geodataframe
+* type ----------> to get type of dataframe 
+* len()----------> to get number of rows of dataframe
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** How we can read  a csv or excel File using pandas
+df = pd.read_csv('path of our  file')
+df = pd.read_excel('path of our  file')
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** How to read and save a shape file using geopandas
+
+gdf = gpd.read_file('path of our shape file')
+gdf.to_file('path', driver='ESRI Shapefile', crs='esri wkt(epsg.io) or epsg code')
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** How to convert a pandas dataframe to geopandas dataframe -----------> for this we need a geometry column in our geodataframe
+
+df = pd.read_excel('path of our  file')
+gdf = gpd.GeoDataFrame(df, geometry =gpd.points_from_xy(df['Longitude'], df['Latitude']),crs=4326 )
+
+or using Shapely
+geometry = [Point(xy) for xy in zip(df['Longitude'], df['Latitude'])]
+gdf = gdf.GeoDataFrame(df, geometry=geometry, crs=4326 or crs of another layer(roads.crs))
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** How to plot a geodataframe using matplotlib 
+* parameters of PLOT
+figsize=(7,7)---------------> it used to sed size of our plot
+cmap='jet or hsv or rainbow'> there are other cmap types that can we find under matplotlin cmap 
+column='population'---------> colur that we use for cmap color
+legend=True----------------> wenn we want to show our legend, it uses column, that we for column argument set
+legend_kwds= {'label':"Area of countries"}
+markersize=1.5-------------> we use it to change size of points in our plot
+column='population' -------> the color name used with cmap to color our points or polygon based on that column
+color='blue or none(to make a no color for a polygon or others)'---------------> wenn we want to hgave our points, poly oder line only color
+facecolor='blue'-----------> like color
+plt.xlabel("Longtitude")
+plt.ylabel("Longtitude")
+edgecolor='black'----------> to make edge color of a polygon
+linewidth=0.5--------------> for polygon and polyline
+* map classify for legend----------> mussen wir mapclassify using "conda install -c conda-forge mapclassify" install
+schema = 'user_defined'
+classification_kwds = {'bins': [10,20,30,100,500,100,5000]}
+*plot title
+ax = df.plot()
+ax.set_title('Population', fontdic={'fontsize':20}, pad=10)
+* get rid of border of plot
+ax = df.plot()
+ax.set_axis_off()
+*move legend
+ax =df.plot()
+ax.get_legend.set_bbox_to_anchor((0.18,0.6))
+ 
+*Plot only one geodataframe  
+gdf.plot()
+plt.show()
+
+* Plot many geodataframe in one plot
+fig, ax = plt.subplot(figsize=(7,7))
+gdf.plot(ax=ax, cmap='jet')
+gdf1.plot(ax=ax, color='blue')
+plt.show()
+
+* plot with legend
+
+fig, ax = plt.subplots(figsize=(7,7))
+divider = make_axes_locatable(ax)
+cax = divider.append_axes("left", size="7%", pad=0.1)
+world_map.plot(column='area', cmap='hsv', legend=True, ax=ax, cax=cax)
+
+** plot a Dataframe
+* Plot two column 
+df = pd.read_csv('path of our  file') 
+df.plot(y=['Iran','USA'], use_index= True(it takes index of excel table as x axis), figsize=(7,7))-------------------------->y and x both musst be column name
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Geoprocessing by geopandas
+
+pol1 = gpd.read_file('path of our shape file')
+pol2 = gpd.read_file('path of our shape file')
+
+* Intersection(polygon to polygon or polygon to other geometries like point or line)
+intersection = gpd.overlay(pol1, pol2, how='intersection' )
+
+* Union
+Union= gpd.overlay(pol1, pol2, how='union' )
+
+* Symmetric Difference --> es delete part that are similar in both polygons and remin rest
+symmetric_difference =gpd.overlay(pol1, pol2, how='symmetric_difference' )
+
+
+* Difference --> es delete part that are unsimilar in both polygons and remin rest
+difference = gpd.overlay(pol1, pol2, how='difference' )
+
+* Dissolve -----> we need a column that has a value that are similar for polygons that we want ot make them only one polygon
+Union= gpd.overlay(pol1, pol2, how='union' ) --> it has 3 polygons that we want to make them a unique polygon
+Union['common_column']=1 --> we create a new column and give it a value
+Dissolve = Union.dissolve(by ='common_column')
+
+* Buffer --> it needs geoseries instead of geodataframe and metric crs
+Roads = Roads.to_crs(epsg=25832)-----------> change our projection to metric 
+Roads_buffer = Roads[geometry].buffer(distance=500(it is in meter))-----------> we use geoseries to create buffer
+
+* Centroid--------------> we get center of a polygon(we need geoseries instead of geodataframe)
+centroid= pol1['geometry'].centroid              ---> output is a point 
+
+
+* Reproject a geodataframe
+pol1.to_crs(epsg=3857, inplace=True)
+
+* Attribute Joins-------> we use a common column name in both dataframe and geodataframe(both column musst have same name)
+df = pd.read_excel('path of our  file')
+gdf = gpd.read_file('path of our shape file')
+join = gdf.merge(df, on="column name that there  is in both dataframe ")
+
+or
+join = gdf.join(df, on="column_name", how='right')
+
+* Spatial Joins
+gdf1 = gpd.read_file('path of our shape file')
+gdf2 = gpd.read_file('path of our shape file')
+gdf1 = gpd.sjoin(gdf1, gdf2, how='left(it will index and geometry from first layer(gdf1), right(it will index and geometry from secondlayer(gdf2)), inner(it use intersection of both layer(recomended for poly and point together)' op='intersect')
+
+** Select by location and attribute 
+
+*Select by attribute 
+world_map = gpd.read_file('C:/Users/ICH/Desktop/1&1/World_Countries.shp')
+Iran = world_map[world_map['COUNTRY']=='Iran']
+
+* Select by location
+world_cities = gpd.read_file('C:/Users/ICH/Desktop/1&1/World_cities.shp')
+Iran_Polygon = gpd.read_file('C:/Users/ICH/Desktop/1&1/Iran_polygons.shp')
+Iran_cities = gpd.overlay(world_cities, Iran_Polygon, how='intersection')
+
+** Calculate Area of Polygon
+ world_cities = gpd.read_file('C:/Users/ICH/Desktop/1&1/World_cities.shp') 
+* First we check our unit of our crs it muss meter sein
+* Add a new column
+world_cities['Area'] =  world_cities.area/1000000         ------> it will in in km2 sein, originaly it is in m2
+
+** Iterate in two  Dataframe(rows) to find for example the same name for a special column, it used to check to dataframe
+for index,row in df.iterrows:
+	if index in df1['Name'].to_list():
+		pass
+	else:
+		pass
+or
+
+for x in df1['Name'].tolist():
+	if x in df2['Name'].tolist():
+		do something
+	
+
+** Iterate in columns of a dataframe as a list
+list_of_columns = df.columns.to_list() 
+len(list_of_columns)
+list_of_columns[2:10]-----> nur special columns
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Edit a dataframe or geodataframe
+
+pol1 = gpd.read_file('path of our shape file')
+
+* add a new column
+pol1['new column name'] = value
+
+* change a column name in  a dataframe or geodataframe
+pol1.rename(columns = {'old_name':'new_name'}, inplace=True)
+
+* we want to have only specific columns of a dataframe 
+pol1 = pol1[['name', 'geometry']] 
+
+* how to get rid of a row or entity(a city or cotry)--> like select by attribute
+
+world_map = gpd.read_file('C:/Users/ICH/Desktop/1&1/World_Countries.shp')
+world_map =  world_map['Name'] != 'Iran']
+ 
+* How to set all rows with same bane in a row(dissolve is for spatioal data aber this is for dataframe) 
+df = df.groupby('column_name').sum()
+
+* How to delete/drop a column from a dataframe
+df = df.drop(columns=['Longitude', 'Latitude'])
+
+* Create Transpose of Dataframe(revwrse row and columns )
+fd = df.T
+
+* How to replace value in dataframe or geodataframe 
+df.replace('value--> Iran','new value--> Islamic Republic of Iran', inplace= True)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Get online Data
+
+* get data using a read_html as list
+data = pd.read_html('https://www.worldometers.info/coronavirus/')
+
+* convert list to a dataframe
+data = pd.read_html('https://www.worldometers.info/coronavirus/')
+for data_cases in dada:
+ 	passs 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Geocoding -------> we use geocode of geopandas (we need to install geopy too)
+
+from geopandas.tools import geocode
+
+excel = os.path.join('C:\\Users\\ICH\Desktop\\1&1', 'Leipzig_Antennen.xlsx')
+df = pd.read_excel(excel)                                                       ---> we read addresses from excel file and want to add coordinate to excel file using geocode
+
+for index, row in df.iterrow():
+	try:
+		g= geocode(row['address'], provider='nominatim', user_agent='xyz', timeout=5)
+		df.loc[index, 'Longitude'] = g.geometry.loc[0].x
+		df.loc[index, 'Latitude'] = g.geometry.loc[0].y----> add new data to excel file
+	except TypeError:
+		print('Kir')
+
+
+df.to_excel('path')
+	
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
