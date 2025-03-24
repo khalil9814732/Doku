@@ -1,0 +1,587 @@
+
+** how can i read a excel, cvs or text file using pandas
+* install pandas
+conda install -c anaconda pandas
+*geopandas
+ we install(gdal, pyproj, fiona,shapely,geopandas) from https://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely
+conda install -c conda-forge geopandas
+import pandas as pd
+
+df = pd.read_excel(path of file)
+df = pd.read_cvs(path of file)  it works for text file too
+df =pd
+** How to get only first or last 10 row 
+
+df = pd.read_excel(path of file)
+print(df.head(10))
+print(df.tail(10))
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+** How we can get attributes of a Dataframe
+
+*Data Type of columns in Dataframe(object(they are normally tetx), float, int)
+df.dtypes
+
+* get unique values in a column of Dataframe
+df['YearsCode(a column)'].unique()
+
+* Name of columns
+print(df.columns) 
+
+* shape of Dataframe(number of rows and columns)
+print(df.shape) 
+
+* Number of Rows
+print(len(df)) 
+
+* To get shape and column type
+print(df.info()) ------------> das is eine Method
+
+* if we want to all columns or rows be displayed
+
+pd.set_option('display.max_columns',85(number of columns, that we want to be displayed))
+pd.set_option('display.max_rows',85(number of rowsthat we want to be displayed))
+
+* first or last number of rows
+df.head()
+df.tai()
+
+* How we get count of any values in a column(how many 1, how many 2 , ...)
+df['Hobbyist'(column name)].value_counts()
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** How to get data of a specific column 
+
+df = pd.read_excel(path of file)
+print(df[column_name])
+
+** or data of a range of rows in  a column
+df = pd.read_excel(path of file)
+print(df[column_name][0:5])
+
+** how to get data of more than a column 
+
+df = pd.read_excel(path of file)
+print(df[['first_column_name','second_column_name']])
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** How to get data of a specific row 
+
+df = pd.read_excel(path of file)
+print(df.iloc[1])
+print(df.iloc[[0,1(index of rows)],2(index of column)])
+** How to get data of a range of rows 
+
+df = pd.read_excel(path of file)
+print(df.iloc[1:10])
+
+** how to reach specific colimns and rows using loc and iloc--> both accept a matris df.loc[row, column] oder df.loc[[rows] , [columns]]
+
+df.iloc[[0,1],[1,2]]
+df.loc[[0,1],['email','name']]
+* slicing 
+df.loc[0:1, 'column_name']
+df.loc[0:2,'Hobbyist':'Employment']--> es ist inclusive
+
+** How to loop through rows in pandas
+
+df = pd.read_excel(path of file)
+for index, row in df.iterrows(): 
+  print(row ['column_name'])       ==> it will prints value of a specific column in every row
+
+**How to get only rows that a specific column value haben
+
+df = pd.read_excel(path of file)
+print (df.loc[df['column_name '] == "column_value"])  ==> it will return all rows with our column value
+
+
+** How to get value of a specif row and column (it is like Matris)
+df = pd.read_excel(path of file)
+print(df.iloc[1,10])  => row,column both start with 0
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** How to get statistics report from our excel file
+
+df = pd.read_excel(path of file)
+df.describe()
+
+** How to sort value of a file using a specific column
+
+df = pd.read_excel(path of file)
+print(df.sort_values('column_name', ascending =False))
+
+**How to sort a sile using two columns
+
+df = pd.read_excel(path of file)
+print(df.sort_values(['column_name', 'second_column'], ascending =[1,0])) ==> first column ascending second not
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*** How to change a Dataframe 
+
+* change all values of a column to lower ot upper case 
+df['name'].str.lower()  or upper()
+** add a new column
+
+df = pd.read_excel(path of file)
+df['new column name'] =df['a exiting column in our excel file ex. 'id']*5
+
+** How to drop a column 
+
+df = pd.read_excel(path of file)
+dfd= df.drop(columns=['name of column, that we will to drop'])
+
+** How to create a new column based on other columns
+
+df = pd.read_excel(path of file)
+df['new_column_name']= df.iloc[:(it means all rows),4:10 (it means new columns value is based on column 4 -10)].sum(axis=1)==> es wird add value of 4-10 columns 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** How to save a DataFrame using pandas
+
+df = pd.read_excel(path of file)
+hatch= df.loc[df[' register_layer'] == "basicmap_hatch"]
+hatch.to_excel('D:\\Omrani\OneDrive - IWO Group\\Lhoist\\FME WORKFLOW\\test.xlsx')
+
+or
+df.to_csv('modified.csv', index=False)
+or
+df.to_csv('modified.txt', sep='\t' )
+
+or to csv with a custom seperater
+df.to_csv('modified.tsv', sep='\t' )
+
+to json
+df.to_json('modified.json', orient='records' , lines=True)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*** Filter in Pandas
+
+** filter by one column
+
+df = pd.read_excel(path of the file )
+filt =df['column_name']=="value of column"]
+df.loc[filt, , [columns_name or a list or only one column(it is optional)]]-----------------------> in this method we can set columns, that we want to get
+ or 
+print(df[df['Hobbyist']=='Yes'])
+** filter by two column
+
+or filter by a list
+countries = ['Germany', 'Iran']
+filt = df['Country'(column name)].isin(countries(our list))
+df.loc[filt,'Country']
+
+df = pd.read_excel(path of the file )
+print(df.loc[(df['first column name']==" value of first column") &(or|  ~(not match))  (df['second column name']=="value of second column") ])-->in this method we can not set columns, that we want to get
+
+
+** How to reset indexes after filter 
+
+df = pd.read_excel(path of file)
+hatch= df.loc[df[' register_layer'] == "basicmap_hatch"]
+hatch = hatch.reset_index()
+
+** How we can drop old indexes after reset
+
+hatch = hatch.reset_index(drop=True)
+
+** How i can find all column values that have a specific thing
+
+filt = df['LanguageWorkedWith(column_name)'].str.contains('Python', na=False)
+df.loc[filt, 'LanguageWorkedWith']
+
+** How i can find all column values that dose not  have a specific thing
+
+print(df.loc[ ~ df[' register_layer'].str.contains
+
+** for better filter can use man regular lib 
+
+import re
+print(df.loc[df[' register_layer'].str.contains('hatch|label',flags=re.I,regex=True)])
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*** Updating Rows and Columns - Modifying Data Within DataFrames 
+**Columns
+* Update all column_Names
+df.columns=['first_name', 'telefone']------------> length of array muss be equal to number of columns 
+
+* make name of columns upper
+df.columns = [x.upper() for x in df.columns]
+
+* Replace spaces with a _ in column names or 
+dff.columns = dff.columns.str.replace(' ','_')
+
+* Update some columns
+df.rename(columns={'first name(old column name)':'first(new column name)', 'last name':'last'}, inplace=True)
+
+**Rows
+
+*update values of a row
+dff.loc[0] = ['karim'(new value of first column), 17632862155(new value of second column)]   -------------> length of list musst be equal to number of columns
+
+* update value for a list of rows 
+ dff.loc[[0,1,2], 'name'] = ['bahman']
+
+* update value for a list of columns in a row or list of rows
+ dff.loc[[0,1,2],[ 'name', 'last_name']] = ['bahman', 'kirkoban']
+
+* How we add a new column value when it has a specific value
+
+df.loc[df['OBJECTID'] == 114, 'cluster'] = 2
+
+** apply----> it works on columns(series)
+
+*get character
+df['name'].apply(len)---------------------------> it give uns length of values for given columns
+
+* apply a function on a column to update
+def update(name):
+    return name.upper()
+df['name'] = df['name'].apply(update_)
+ 
+or using lambda ohne separate function
+dff['name'] = dff['name'].apply(lambda x: x.lower()) --------------------> x is value of columns for any row
+
+** applymap-------------> it works on Dataframe
+df.applymap(str.upper)----------> it makes value of all columns upper 
+
+** map ------------------------> it works on columns(series) it used to replace old value with new values
+dff['name'].map({'khalil':'karim','omrani':'vali'})-----> we need to give values of all column a new vlaue otherweis it will be Nan als new value
+
+**replace
+dff['name'].replace({'khalil':'karim'})----> we do not need to give values of all column a new vlaue 
+
+*How to change value of two column when a specific column a specific value hat 
+
+ df.loc[df['id']>30, [' autocad_layer', ' register_layer']]='test'
+or
+dff.loc[0(row label), 'name'(column name)] = ['bahman']------------> we wan to change only a specific column 
+or seperate value for every columns 
+
+df.loc[df[' register_layer'] == "basicmap_hatch", [' register_layer','autocad_layer']] = [ 'kir', 'khaye']
+print(df.head(10))
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*** Agregate Statistics (Groupby) 
+** Statistics
+
+** Counter 
+# we have a column, that has values for different Programming languages, that any developers use , we want to count that how many developers use Python or Java(for csv file)
+
+from collections import Counter
+import csv
+
+* using standard 
+from open ('data.csv') as csv_file:
+    language_counter= Counter()
+    csv_reader = csv.DictReader(csv_file)
+    for row in csv_reader:
+        language_counter.update(row['LanguageWorkedWith'])-------------------------------> it shows uns how many times E.x Python repeatet in a specific column
+
+or using pandas 
+
+data = pd.read_csv('data.csv')
+languages = data['LanguageWorkedWith']
+language_counter= Counter()
+    
+for response in data['LanguageWorkedWith']:
+    language_counter.update(str(response).split(';'))
+    
+x_languages = []
+y_popularity =[]
+        
+for item in language_counter.most_common(15):
+    
+    x_languages.append(item[0])
+    y_popularity.append(item[1])
+
+* How to get medien of a column(میانه) or all Dataframe(it calculate it for columns with type number)
+df['ConvertedComp'].median() 
+df.median()
+
+*How to get average of a column or all Dataframe(it calculate it for columns with type number)
+df['ConvertedComp'].mean() 
+df.mean()
+*How to get sum of a column or all Dataframe(it calculate it for columns with type number)
+df['ConvertedComp'].sum() 
+df.sum()
+
+* How to get a statistics describtion of Dataframe(column with number type)(count, mean, ...)
+df.describe()
+df['column_name'].describe()
+
+*How to get number of rows in a coulmn , that has value and not NaN
+df['column_name']. count()
+
+* How can i understand  how many similar value in a coulmn are there(how many 'yes' how many 'no' or other values)
+df_antennen['Antenna_Height_AGL__meter_'].value_counts()
+or in precent
+df_antennen['Antenna_Height_AGL__meter_'].value_counts(normalize=True)
+
+
+***GroupBy(  it is normally three steps )
+
+** Split
+* Create a Frame work based on values on a coulmns(for each country a sepetate Dateframe)
+country_group = df.groupby(['Country'(it will create for any different value a group )])
+country_group.get_group('Iran')----------> so can we it call
+
+or 
+filt = df['Country']=='Iran' ------------------------> it is good, whenn we look only for a country 
+df.loc[filt]
+
+
+** Function( like value_counts() or other functions and it happens after split )
+
+country_group = df.groupby(['Country'])
+country_group.get_group('Iran')['Age'].value_counts()
+
+or for all DataFrame and not a specific country
+country_group['Age'(our column)].value_counts().head(50)
+country_group['Age'(our column)].value_counts().loc['Iran'] ------------------------------------> so can we look in a Dataframe for a specific country, and give a count number back and not a DataFrame
+or 
+filt = df['Country']=='Iran' ------------------------> it is good, whenn we look only for a country 
+df.loc[filt]['Age'].value_counts()
+
+* Get Median for all Groups 
+
+country_group = df.groupby(['Country'])
+country_group['Salary'].median()-----------------------------------------------------> it shows median of all countries(groups)
+country_group['ConvertedComp'].median().loc['United States']---------------> when we want to have info of a specific country(group)
+
+* How can i get mean and median for a group together
+country_group['ConvertedComp'].agg(['median','mean'])
+country_group['ConvertedComp'].agg(['median','mean']).loc['China']
+
+** Developers have different script langeuge worked with, i want to know in Iran how many people uses Python
+# as a single country
+filt = df['Country']=='Iran' ----------------> that is a filter an our Dataframe
+df.loc[filt]['LanguageWorkedWith(in this column are die Answers)'].str.contains('Python').sum()-------------->  Dataframe has info of all countries and we seperate iran
+
+# or using groupby
+group = df.groupby('Country')
+group['LanguageWorkedWith(our column_name)'].apply(lambda x: x.str.contains('Python').sum())--------------> we use lambda, will it is a Groupseries and dose not support 'str', because of that we need to use lambda usind 'apply'
+---------------------------------------------------------
+** How can i combine two series in a DataFrame(I want to know how many precent of people in each country use Python)
+developers_number(first seris)= df['Country'].value_counts() -----------------> first get i number of developers from each country()
+
+group= df.groupby(['Country'])
+number_of_developers_that_use_python(second series)=group['LanguageWorkedWith'].apply(lambda x:x.str.contains('Python').sum())
+
+df_python = pd.concat([developers_number, number_of_developers_that_use_python], axis='columns', sort=False )-----------> combine two series
+
+df_python.rename(columns={'Country':'NumRespondent', 'LanguageWorkedWith':'NumNkowsPython'}, inplace=True)--------------> change column_Name when we want
+
+df_python['pctKnowPython']=(df_python['NumNkowsPython']/df_python['NumRespondent'])*100-------------------------> add a new column to show precentage of developers. that use python
+-----------------------------------------------------------------
+** How we can get average or other statiscs things of a group of things (ex. average of earn all user based on country name)
+
+df.groupby(['country_name']).mean().sort_value('sorting column', ascending= False)
+
+** How we can remove some columns by grouping
+
+test =df.groupby(['country_name']).mean()['earn', 'distance_to_...']
+print(test)
+
+** How we can group using two columns
+
+test =df.groupby([' register_layer','autocad_layer']).mean()
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** How we can load a big file (5 gb) using pandas
+
+for df in pd.read_csv('file path', chunksize=5(number of rows)):
+       print(df)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Indexs  and Create Dataframe  using a dictionary --> a Dataframe is like a dic{} , that values are in a list[]    and 
+
+people ={
+    "name":['khalil','jalil'],
+    "tel":[1234,1234]
+    "email":['khalil@gmail.com', 'david@gmail.com']
+}
+df = pd.DataFrame(people)
+
+print(people['name']) = print(df['name'])
+
+** Indexes (LABELS FOR THE ROWS, it should be a uniqu it helps uns by serching ) --> without define Indexes, will label of rows RANGE OF NUMBERS STARTING AT ZERO
+
+* Why we need index----------------> to simply reach a specific column by index , because it is unique
+
+* How to set a column as index of dataframe
+df.set_index('email', inplace=True(without inplace it will not be saved in dataframe))
+
+* How can i reset Indexes(again integer valuses for  index labels)
+df.reset_index(inplace=True)
+
+* How to set a column as index by reading it
+df = pd.read_csv('data.csv', index_col='Respondent'(column name, that we want to our index))
+
+* How to sort indexes alphabetically
+df.sort_index(inplace=True)
+
+or
+ df.sort_index(ascending=False, inplace=True)
+* How to get List of indexes
+df.index
+or
+df.index[0] --------> for specific index
+
+** Difference between Dataframe and Series
+
+So, the Series is column of a DataFrame, i.e. the data in a DataFrame is actually stored in memory as a collection of Series.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** *Create and Remove columns and Rows
+
+**Columns
+
+* Create a neu column based exiting columns
+df['full_name']= df['name']+'' + df['tel']
+
+* Remove exiting Columns
+df_.drop(columns=['full_name','tel'], inplace=True)
+  
+* Create two separate columns from a column
+df[['first','last']]= df['full_name'].str.split(' ', expand=True)
+
+** Rows
+
+* Add a new row
+df.append({'first':'vali','last':'golamzadeh', 'full_name':'vali golamzadeh'}, ignore_index=True)
+
+* Combine two Dataframe toghether
+df_all = df.append( df_1,  ignore_index=True)
+
+* Drop a row
+df.drop(index=4)
+
+* Drop a row based on condition
+filt = df['first'] == 'vali'
+df.drop(index= df[filt].index, inplace=True)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Sorting Data in Pandas DataFrame
+
+* sort based on a column
+df.sort_values(by='first', ascending= False)
+
+* sort based on a many column ---------------------> when first parameters are same second will be checked
+df.sort_values(by=['first','last'], ascending= False)
+
+* How can i sort two columns differently
+df.sort_values(by=['first','last'], ascending=[False,False], inplace=True)
+
+* How to make our Dataframe sorting back
+df.sort_index()
+
+* Get sort value only for a series(column)
+df['first'].sort_values()
+
+* How to get largestvalues from a column(for example salaries)
+
+df['ConvertedComp'(coulmn name)].nlargest(20)-------------> 20 largest salaries
+
+* Get largestvalues for a column brside other columns
+df.nlargest(20(number of largest values), 'ConvertedComp'(column name))
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+***Cleaning Data
+
+** NaN
+
+* Get rid of a row, that have a NaN value in some columns or a column
+df.dropna(axis='index', how='any', inplace=True)-----------------------> when a column in a row has NaN(numpy.nan) the row will be delete
+
+* Get rid of a row, that have a Missing value in some columns or a column
+df.dropna(axis='index', how='all' , inplace=True)-----------------------> musst all columns  of a row be NaN then row will be delete
+
+* Get rid of a column , that have a Missing value ------> it is like row
+df.dropna(axis='columns', how='any' , inplace=True)
+df.dropna(axis='columns', how='all' , inplace=True)
+
+* I want to delet a row when a specific column has no value(NaN)
+df_test.dropna(axis='index', how='all', subset=['age'] , inplace=True)----------------------------------> when age column NaN is, then row will be delete
+or
+
+df_test.dropna(axis='index', how='all', subset=['age','first'] , inplace=True)--------------------------> both age and first column musst be NaN , then row will be delete
+
+** Missing Value and NA 
+
+* first we need to change Missing and NA to numpy.nan then we can they delete or chanhe
+df.replace('NA',np.nan, inplace=True)
+df.replace('Missing',np.nan, inplace=True)
+or by reading our data we can set them as NaN
+na_values = ['Missing', 'NA']
+df = pd.read_csv('data.csv',         na_values=missing_values,  index_col='IDNumber' )
+* I want to know, wether i have NaN in my dataframe or a column
+df.isna()
+df['first'].isna()
+
+* How can i replace NaN values in our Dataframe with another value
+
+df_test.fillna('kir')
+or only a coulmn
+df_test['age'].fillna(0, inplace=True)
+
+
+* Covert Data type of a column from string(object) to int or float
+
+df.dtypes()---------------------------> it shows uns which Datatype have we for columns 
+df_test['age']=df_test['age'].astype(float)-------------------------> if we have NaN in our column, then we use float
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Dates and Time Series Data
+
+*Convert a column with string(object) type to Date 
+df['Date']= pd.to_datetime(df['Date'], format ='%Y(year)-%m(month)-%d(day) %I(hour)-%p(pm or am)')
+
+* How to get Day_Name(Friday or other Day) for a specific row
+df.loc[0, 'Date'].day_name()
+
+or for all rows
+df['Date'].dt.day_name()
+
+* How can set Date Column by reading our excel or csv file
+d_parser = lambda x : pd.datetime.strptime(x, '%Y(year)-%m(month)-%d(day) %I(hour)-%p(pm or am)')
+df = pd.read_csv('data.csv', parse_dates=['Date'(column with date info)], date_parser = d_parser
+
+* How can i get earlist and latest Date in a Dataframe
+df['Date'(our coulmn with Date)].min()
+df['Date'(our coulmn with Date)].max()
+
+* How to substrct two Date
+df['Date'(our coulmn with Date)].max() - df['Date'(our coulmn with Date)].min()
+
+* Filter a Date column
+filt = df['Date']>= '2020-03-13 19'
+df.loc[filt]
+
+* Resample 
+we record our data each hour(24 times per Day), now we Want to know max or min for each day(D) or week(W) or month or 2Day
+
+df_date.set_index('Date(a column for our date and as a date type)', inplace=True)-----------------------------------------------------> our index musst be column with data type Date
+highs = df_date['High'(column_name)].resample('D'(Day)).max()-------------------> maximal value for a day
+highs['2020-01-01']---------------------------------------------------------------------------------> it returns max for a specific Day
+
+or for all Dataframe
+df_date.resample('D').max()
+
+*Aggregation----------> we want to get statistics of any columns using "agg"
+df_date.resample('D').agg({'High':'max', 'Low':'min', 'Close':'mean', 'Volume':'sum'})
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
