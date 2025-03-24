@@ -1,0 +1,12 @@
+## pgrouting
+
+--ALTER TABLE infrastruktur.duesseldorf_roads ADD target INT4;
+--ALTER TABLE infrastruktur.duesseldorf_roads ADD source INT4;
+--select pgr_nodeNetwork('infrastruktur.duesseldorf_roads', 0.00001 )
+--select pgr_createTopology('infrastruktur.duesseldorf_roads_noded', 0.00001 ) 
+--ALTER TABLE infrastruktur.edge_table_noded ADD name VARCHAR, ADD type VARCHAR
+--ALTER TABLE infrastruktur.duesseldorf_roads_noded ADD type VARCHAR;
+--UPDATE infrastruktur.duesseldorf_roads_noded AS new SET type=old.fclass from infrastruktur.duesseldorf_roads as old where new.old_id=old.id
+--ALTER TABLE infrastruktur.duesseldorf_roads_noded ADD distance  FLOAT;
+--UPDATE infrastruktur.duesseldorf_roads_noded SET distance = ST_Length(ST_Transform(the_geom,4326)::geography)/1000;
+--SELECT * FROM pgr_dijkstra('SELECT  id, source,target,distance as cost FROM infrastruktur.duesseldorf_roads_noded', 1,9,false)
