@@ -1,0 +1,33 @@
+1- Was ist pm2 und warum 
+
+
+pm2: Production Manager für Node.js 
+Node : a JavaScript runtime that allows you to run JS code outside of a web browser.
+warum benutzen wir pm2: Wenn die Command Prompt geschlossen wird, wird unsere Prozess gestopped. Und in jeder Command promt konnen wir nur eine Application im laufen haben. neue Command promt für neue Applikation. 
+NZV : Um ein möglichst umfangreiches Bild der Verfügbarkeiten an einem Standort zu erlangen, konsolidiert die NZV die verschiedenen technischen Vorleistungsprodukte, die an einer Adresse zur Verfügung stehen.
+
+# How can i start/stop/restart eine Applikation using pm2 
+	pm2 start/stop/restart app_name 
+
+https://pm2.io/docs/runtime/overview/
+
+-- Wie kann ich React durch pm2 starten 
+
+ 	pm2 start --name <<App.js-->App Name >>  npm -- start
+
+-- list Anwendungen 
+        pm2 list oder Status/list 
+
+-- logs
+       pm2 logs app_name| all
+
+--  Load Balancing 
+        pm2 start <<app-name>> -i max 
+
+-- Then to update application without downtimes:
+	pm2 reload all
+
+-- In-terminal monitoring
+	pm2 monit
+Heap Size:  The heap is the RAM used by the program you're asking PM2 to manage and monitor.
+
