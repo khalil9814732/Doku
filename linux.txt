@@ -1,3 +1,10 @@
+Linux ist der Kernel 
+die Sachen wie 
+-- Ubuntu 
+-- Redhat 
+sind einfach was von Linux weiter entwickelt wurde. 
+
+
 -- Wie kann ich eine Server verbinden
 
 	ssh   user@url 
