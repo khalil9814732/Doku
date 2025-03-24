@@ -103,3 +103,9 @@
 	netstat - tunlp 
 	ss -tunlp
 	nmap es muss installiert werden 
+
+Linux Befehle
+
+- htop         Es zeigt uns die Status von CPU
+- du           to check Size von einem folder oder file
+-df -h         to ckeck Size von allen Folders und Files
