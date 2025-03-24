@@ -1,0 +1,118 @@
+************************************************************************Git***********************************************************************************************************
+** git bei 1&1
+auf git icon clicken und erst mal folgende url eingeben. 
+http://gitlab.docker.versatel.local/dicc/datalab/datalab.git
+git config --global user.email khalil.omrani@iund1.net
+git config --global user.name Khalil.Omrani
+-------------------------------------------------------------------------------
+**Stage  : Es Bereit machen zu commiten
+-----------------------------------------------
+** Repository   Es wie ein Folder, der in git ist und es hat den Folder git drin 
+
+* Wie kann ich eine Folder zur eine Repository konvertieren ---- git init
+Es wird eine git Folder erezeugen.  und git Folder ist eine Hiden Folder 
+oder unter VS Code aus gi icon klicken und die Option intiate Repository klicken. 
+--------------------------------------------------------
+** Commit
+*jeder Commit braucht eine Name und Email Adresse und es sollte geset werden 
+*Commet ist eine SavePoint
+* Wenn du einen File ein Mal commitet hast, bei neue Veränderungen wird es eine grüne Farbe neben der Skript zeigen, das zeigt das es neue Line ist und noch nicht commitet wurde
+* Unterschied zwischen Commit und Push, bei Commit wird mein Skript nur lokal in meinem Repository dokumentiert, aber bei push wird es in GitHub oder GitLab dokumentiert.
+
+--------------------------------------------
+Was bedeutet die Buchstaben neben der Files in VS code
+U es bedeutet dass der File ist NUE und nicht commitet.  
+A eine neue File, die stage gemacht wurde.
+M heißt es ist eine comitete File und da gibt neue Veränderungen die bis her nicht commitet wurde.
+-----------------------------------------
+**git History
+* Das kann man durch die Extension "git history" instalieren
+* Es zeigt was von letzeten commit passiert ist 
+* Durch diese Extention kann man alte Skript auch wieder bekommen. click auf move und dann checkout commit.
+* Aber die Veränderungen sollen unter head Commit passieren
+* Die Commits combinieren, auf soft klicken und es wird die Commits zusammenführen und dann kann man nochmal commite. In dieser Option wird die Veränderungen behalten.
+* Wenn du neue Veränderungen nicht mehr behalten möchtest, dann auf hard clicken. 
+---------------------------------------
+** Branch: Es ist eine liste von Commits
+*  master ist default branch
+* Man kann ein Branch mit anderen mergen. Es ist so dass wir eine Kopie von unsere master Branch machen und unsere Veränderung in Kopie machen, Wenn es OK ist, werden wir die Kopie Version mit master Branch mergen.
+Das wird durch Developers auch benutzt. Das jeder Developer mit einem Branch arbeitet und am Ende die können ihre Branch mergen
+* Wenn man eine neue Branch erzeugen möchte, kann man einfach in VS Code auf master Branch klicken und eine neue erzeugen. Neue Branch wird die Commits von master haben.
+* Neue Branch wird eine Kopie von master sein, wenn wir nur ein Teil der master Branch in neue Branch haben wollen, dann neben dem Commit klicken wir auf "+Branch"
+*Branch Kann man durch ctrl+shift+p und >git:delete branch löschen
+*Die Sterne * auf Branch  Name zeigt, dass etwas modified  ist. 
+* Die Plus + zeigt, dass es ist staged wurde 
+* drch ctrl+shift+p und >git:merge branch  kann man zwei Branche zusammenführen. Aber muss man erst in master Branch sein.
+* Wie kann ich ein Branch in GitHum pushen,  git push repository_adress(https://github.com/khalil9814732/test_1.git) branch_name(master)
+----------------------------------------------------------------------------------------
+** Welche Files wird von git nicht beobachtet
+* man kann einen eine File erstellen untername .gitignore und name der Files, dass nicht beoberchtet werden soll da rein schreiben
+--------------------------------------
+** GitHub wird als Host von git benutzt, gitlab spielt auch dieselbe rolle
+* git kann alleine auch benutzt werden, wenn wir unsere Skript nur selber benutzen wollen, aber wenn wir unsere Skript mit anderen teilen wollen dann spilelt github oder gitlab eine rolle. 
+--------------------------------------
+** Wie kann eine Veränderung von git zurück bekommen
+------------------------------------------------------
+
+-----------
+Für Montag 
+
+- git history
+*die Veränderungen verfolgen
+*Die Alte Skript zurück bekommen durch move --> checkout commit, Master wird untern auch nicht gezeigt wurde sondern ID  von Commit, das heißt sind nicht mehr in Head Commit
+
+- Buchstaben
+* U eine neue File die nicht commit gemacht wurde und nicht modified wurde
+* A eine neue File die nicht commit wurde und aber modiffied werde
+* M eine gecomittete File die modified wurde
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
