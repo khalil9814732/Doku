@@ -18,6 +18,11 @@ sind einfach was von Linux weiter entwickelt wurde.
 whoami 
 es zeigt der Name von User
 -----------
+file filename 
+es zeigt File name und Type (z:B ASCII text)
+
+----------------------------------------
+
 -- Wie kann ich eine Server verbinden
 
 	ssh   user@url 
@@ -83,6 +88,8 @@ es zeigt der Name von User
 	cp   file name  /distance    to copy
 	mv  file name /distance     to move a file 
 	rm to delete 
+	rm -rf * delet all 
+	
 
  -- How to remove a direktory
 	--rmdir path  
@@ -147,3 +154,13 @@ Linux Befehle
 - htop         Es zeigt uns die Status von CPU
 - du           to check Size von einem folder oder file
 -df -h         to ckeck Size von allen Folders und Files
+
+
+Files inLinux
+ls l um die files zu zeigen 
+-   --> alle files die mit - anfangen sind eine text oder regular File 
+d   --> alle files die mit d  anfangen sind eine direktory 
+c    --> character Files 
+b   --> Blockfiles wie disk oder hrd
+l  --> Linke Files wie short kart   mit ln -s  kann man eine short cut von einem File erstellen    ln -s  /home/gisdata/gherbran/test/test.py cmd --> cmd als eine short cut von test.py
+und für unlink --> unlink Shortcut Name 
