@@ -59,7 +59,12 @@ es zeigt der Name von User
 	: se nu    es wird linenummber hinzufügen 
 	: Shift + G  Damit kann man Ende der Seite kommen
 	: g erste Linie 
-	yy am anfang kann kopieren und p kann past machen
+	yy am anfang kann kopieren und p kann past machen  -------> nicht in editmode 
+	dd to delete a line  und auch für cut              -------> nicht in editmode 
+	3yy copier drei Linie                            -------> nicht in editmode 
+	5dd delete 5 Linie                               -------> nicht in editmode 
+	u für undo                                    -------> nicht in editmode 
+	/  für search   enter  n für naxt                                 -------> nicht in editmode 
 
 
 -- To Read a File Name 
