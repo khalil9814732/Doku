@@ -1,19 +1,35 @@
+wie kann ich  
+cat /etc/os-release 
+cat etc/hostname
+cat etc/cpuinfo 
+----------------
+
+
+
+
+
 Linux ist der Kernel 
 die Sachen wie 
 -- Ubuntu 
 -- Redhat 
 -- dbian 
 sind einfach was von Linux weiter entwickelt wurde. 
-
-
+----------
+whoami 
+es zeigt der Name von User
+-----------
 -- Wie kann ich eine Server verbinden
 
 	ssh   user@url 
-
+-------------------------------
 -- List all Files
 	ls  
 	ls -l
 	ls -al   -> Für Hiden Stafs
+	ls -lt *
+----------------------------------
+---------------------------
+
 
 -- Print working Directory
 	pwd
@@ -24,6 +40,7 @@ sind einfach was von Linux weiter entwickelt wurde.
 	touch file.txt 
 	touch file_1 file_2   -> mehr als 1 file 
 	touch linode{1..10}  -> 
+	touch line{1..10}.py
 
 -- Print Something
 	echo "Hello World"
@@ -35,7 +52,15 @@ sind einfach was von Linux weiter entwickelt wurde.
 -- Edite a File 
 	vim File Name 
 	i to insert a text 
-	escape :wq  to save 
+	escape 
+	:wq        to save  und quit
+	: q        quit
+	:q!        quit ohne save
+	: se nu    es wird linenummber hinzufügen 
+	: Shift + G  Damit kann man Ende der Seite kommen
+	: g erste Linie 
+	yy am anfang kann kopieren und p kann past machen
+
 
 -- To Read a File Name 
 	cat File Name --> Es wird die text in File printen
