@@ -2,6 +2,7 @@ wie kann ich
 cat /etc/os-release 
 cat etc/hostname
 cat etc/cpuinfo 
+cat /ect/passwd  in diesem File wird 
 ----------------
 
 
@@ -54,6 +55,28 @@ es zeigt File name und Type (z:B ASCII text)
 -- write in a File 
 	nano File name 
 	ctrl x y Enter--> to save nano File 
+
+--------------------------------------
+--Grep  ---> to search somthing in files(every thing in linux ist a file )
+grep gherbran /etc/passwd        oder grep gherbran < passwd
+Linux ist case sensitive und kann man das mit switch -i beheben
+grep -i khalil  /test.txt    
+grep -i khalil  etc/*          --> oberall in etc wird es nach mir suchen
+grep -i khalil *                    oberall wird nach khalil gesucht
+grep -iR khali  *                   Mit Switch R es wird die Directories auch suchen
+grep -iv khalil  *                  Mit Switch -v wird reverse search gemacht. Es wird all zurück geben außer khalil
+---------------------------------
+Less  --> to read a File 
+
+es ist wie cat 
+mit q/   kann man nach etwas suchen. 
+:q  quit
+
+---------------------------------------------------------------------
+More  --> to read a file 
+:q  to quit 
+
+-------------------------------------------
 -- Edite a File 
 	vim File Name 
 	i to insert a text 
@@ -74,10 +97,13 @@ es zeigt File name und Type (z:B ASCII text)
 
 -- To Read a File Name 
 	cat File Name --> Es wird die text in File printen
-	lese
-	tail 
-	head
--- To make Text of a File unreadable 
+	lese      --> to read    mit arrow kann man sich in text bewegen
+	more   --> to read   mit enter kann sich in text bewegen
+	tail  ---> es zeigt die Text dynamic  switch f 
+	tail -f file 
+	tail ist super wenn man log Files lesen möchte  
+	head          to read only afew line of test from above
+         -- To make Text of a File unreadable 
 	shred File Name 
 
 
