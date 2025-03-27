@@ -71,8 +71,28 @@ Less  --> to read a File
 es ist wie cat 
 mit q/   kann man nach etwas suchen. 
 :q  quit
+---------------------------
+cut              to get only one part of test  
+-f                          field mit einem number oder column number
+-d                         delemeetor oder separetor 
+ cut -d: -f1 /etc/passwd
 
 ---------------------------------------------------------------------
+awk     es ist wie cut aber kann man mit regualr expression arbeiten
+
+awk -F ':' '{print $1}' /etc/passwd
+-----------------------------
+sed    für Editirung von Text 
+
+-kann man in mehrere Files nach etws suchen
+- File und replace ist auch möglich 
+- s search
+-g global
+-i to save changes sonst wird es nur die Veränderungen zeigen.
+sed -i  's/hallo/Hello/g' test.txt
+
+
+---------------------------------
 More  --> to read a file 
 :q  to quit 
 
@@ -93,7 +113,7 @@ More  --> to read a file
 	5dd delete 5 Linie                               -------> nicht in editmode 
 	u für undo                                    -------> nicht in editmode 
 	/  für search   enter  n für naxt                                 -------> nicht in editmode 
-
+	%s/hallo/Hello        find hallo und replace mit Hello
 
 -- To Read a File Name 
 	cat File Name --> Es wird die text in File printen
