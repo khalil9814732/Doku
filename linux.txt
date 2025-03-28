@@ -7,7 +7,7 @@ cat /ect/passwd  in diesem File wird
 
 
 
-
+--------------------------------
 
 Linux ist der Kernel 
 die Sachen wie 
@@ -51,6 +51,13 @@ es zeigt File name und Type (z:B ASCII text)
 -- Print Something
 	echo "Hello World"
 	echo test >test --------> it will write sth in file "test"
+-----------------------------------------------
+redirekt die output in a file
+>                uptime > test.txt       Es wird überschreiebn die bestehende Text
+>>               uptime >> test.txt       Es wird der Text am Ende anhängen
+                 /etc/passwd > test.txt 
+echo "This a Bericht"         >> test.txt
+----------------------------------------------------------
 
 -- write in a File 
 	nano File name 
@@ -142,16 +149,29 @@ More  --> to read a file
 	rm -r path     ->wenn die Directory nicht empty ist 
 -- Name von Benutzer 
 	woami
+----------------------------------------------
+-- Users & Groups
+-- Die Users Names sind unter /etc/passwd                    oder grep -i usersname /etc/passwd
+-- Passwords dind unter /etc/shadow  
+-- passwd userNamw      --> kann man für eine User password set machen
+-- su username  -->   kann man so switch machen zu anderen User
+-- su -         -->   kann man so zur root User switchen
+--id  username  zeigt usere id group id group name 
+-- jeder User hat unter /home eine Hoem Direktotry 
+-- root User hat es unter /root
+--useradd Username
+--groupadd group name 
+-- add a user to a group usermod -aG groupName userName 
+oder kann man die Users direkt in etc/group hinzufügen 
+--sudo useradd UserName
+--Change the User                          -- sudo su  -  
+--Wie kann ich nicht mehr a Benutzer sein   exit
 
--- Add User 
-	useradd Username
-	sudo useradd UserName
--- Change the User
-	-- su  
+-------------------------------------------------------------------------------
 
--- Wie kann ich nicht mehr a Benutzer sein 
-	exit
 
+
+----------------------------------------------------------------------
 -- Install a Package 
 --sudo apt install PackageName 
 
@@ -196,12 +216,12 @@ More  --> to read a file
 	nmap es muss installiert werden 
 
 Linux Befehle
-
+-----------------------------------------
 - htop         Es zeigt uns die Status von CPU
 - du           to check Size von einem folder oder file
 -df -h         to ckeck Size von allen Folders und Files
 
-
+--------------------------------------------------------------------
 Files inLinux
 ls l um die files zu zeigen 
 -   --> alle files die mit - anfangen sind eine text oder regular File 
