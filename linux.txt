@@ -160,12 +160,21 @@ More  --> to read a file
 -- jeder User hat unter /home eine Hoem Direktotry 
 -- root User hat es unter /root
 --useradd Username
+-- userdel -r   delete User mit Home Directory 
 --groupadd group name 
+--groupdel groupName 
 -- add a user to a group usermod -aG groupName userName 
+
 oder kann man die Users direkt in etc/group hinzufügen 
 --sudo useradd UserName
 --Change the User                          -- sudo su  -  
 --Wie kann ich nicht mehr a Benutzer sein   exit
+
+- Security von Users und Server 
+-- last  zeigt wer hat sich letztes Mal an Server eingelogt 
+-- last -1 letzte User, der sich eingelogt hat. 
+--who   zeigt wer ist jetzt eingelogt 
+-- lsof -u gherbran  Es zeigt alle Files die von User geöffnet wurde 
 
 -------------------------------------------------------------------------------
 
