@@ -188,7 +188,7 @@ oder kann man die Users direkt in etc/group hinzufügen
 ----------------------------------------------------------------------
 -- Install a Package 
 --sudo apt install PackageName 
-
+--------------------------------------------------------
 -- Wie kann ich etwas vom Internet herunterladebn
 	wget url 
  	curl url 
@@ -211,6 +211,7 @@ oder kann man die Users direkt in etc/group hinzufügen
 	df  -H 
 -- to check cpu status 
 	top oder htop 
+	htop -p pid von Prozess oder App um nur die infos von einem bestimmte app bekommen 
 
 -- stop a Process 
 	kill process-id
