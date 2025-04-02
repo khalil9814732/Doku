@@ -4,7 +4,7 @@ cat etc/hostname
 cat etc/cpuinfo 
 cat /ect/passwd  in diesem File wird 
 ----------------
-
+cat /proc(cpuinfo
 
 
 --------------------------------
@@ -186,8 +186,20 @@ oder kann man die Users direkt in etc/group hinzufügen
 
 
 ----------------------------------------------------------------------
--- Install a Package 
---sudo apt install PackageName 
+--  Packages : 
+-- in .deb Distributions  wie Ubunto Systems verwenden wir apt als Package Manager
+-- Iin rpm Distributions wie centOS oder Red Hat verwendet man yumals Package manager 
+--Software in Linux wurde Package genannt
+-- Package können debian(.deb)wie ubunto oder rpm (.rmp) wie readhat oder centOS  sein 
+--sudo apt/yum install PackageName 
+-- sudo apt/yum uninstall PackageName
+-- apt/yum purge packageName       purage remove package und configuration files                 
+-- /etc/apt/sources.list   list von Package sources findet man unter. Sources sind wo apt oder yum da suchen nach Packages zu instalieren
+oder vom Internet herunterladen (wget link ) und dann durch dpkg/yum(redhat) -i file Path installieren
+--dpkg/yum -l | grep pakagename    damit kann man sicher sein dass package installiert ist 
+-- | ist eine redirektion wie >
+-- dpkg/yum search packageName um nach einem Package  in Repository zusuchen
+
 --------------------------------------------------------
 -- Wie kann ich etwas vom Internet herunterladebn
 	wget url 
