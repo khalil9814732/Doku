@@ -164,8 +164,8 @@ More  --> to read a file
 --groupadd group name 
 --groupdel groupName 
 -- add a user to a group usermod -aG groupName userName 
-
 oder kann man die Users direkt in etc/group hinzufügen 
+
 --sudo useradd UserName
 --Change the User                          -- sudo su  -  
 --Wie kann ich nicht mehr a Benutzer sein   exit
@@ -233,9 +233,45 @@ Linux Befehle
 --------------------------------------------------------------------
 Files inLinux
 ls l um die files zu zeigen 
+
 -   --> alle files die mit - anfangen sind eine text oder regular File 
 d   --> alle files die mit d  anfangen sind eine direktory 
 c    --> character Files 
 b   --> Blockfiles wie disk oder hrd
 l  --> Linke Files wie short kart   mit ln -s  kann man eine short cut von einem File erstellen    ln -s  /home/gisdata/gherbran/test/test.py cmd --> cmd als eine short cut von test.py
 und für unlink --> unlink Shortcut Name 
+** Permissions
+-  r read
+-  w write
+- x Execute
+- jeder File hat owndership User und Ownership Group 
+- ls -l 
+drwx(User_Permission + Datatype)xrw(Group Permission)xr-x(Other permission).  5 gherbran(Owner User) gisdata (Owner Group)
+- chown gis_test(neue owner name):gis_test(neue group name ) test.txt  (file name)                        owner von einem File verändern
+- R Switch R wird darum Kürmmern, dass die Subdirectory von Folders auch neue owner und group bekommen  chown  -R gis_test:gis_test test/
+- Change permissions:
+	* chmod u-w test/    owner user wird nicht mehr write Rechte haben.
+	* chmod u-x test/     er kann nicht mehr file executen
+	* chmod o-wrx  test/     alle rechte wurde von other users weggenommen 
+	* chmod o+wrx test       alle rechte wurde an  other users gegeben 
+	. chmod--->     prompt 
+	. u user
+	. g droup 
+	. o others
+	. - eine Permission von einem User wegnehmen 
+	. + eine Permission an einem User geben
+	. r,w,x read write execute
+
+ 	# andere methode 
+	*chmod 7(User Rechte, wenn 7 ist wäre alle Rechte)7(group Rechte)7 (Others Rechte)
+	4 read
+	2 write
+	1 execute
+	0 keine Rechte
+	- für vollpermission sollte 7 sein 
+	- 
+
+	
+
+
+
