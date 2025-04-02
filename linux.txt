@@ -151,6 +151,11 @@ More  --> to read a file
 	woami
 ----------------------------------------------
 -- Users & Groups
+-- root ist die Starkste Users mit alle Rechte
+-- Prompt sudo  gibt eine normale User die Root Rechte,aber das muss von Admin eingerichtet sein 
+--  /etc/sudoers --> hier wird die Users mit der Möglichkeit root definiert. Es ist nicht editable.
+--  visudo /etc/sudoers           visodu ist einzige Tools, das man sudoers editieren kann 
+-- su -Username kann man zwischen unterschiedliche Users switchen 
 -- Die Users Names sind unter /etc/passwd                    oder grep -i usersname /etc/passwd
 -- Passwords dind unter /etc/shadow  
 -- passwd userNamw      --> kann man für eine User password set machen
