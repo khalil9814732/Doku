@@ -182,9 +182,15 @@ oder kann man die Users direkt in etc/group hinzufügen
 -- lsof -u gherbran  Es zeigt alle Files die von User geöffnet wurde 
 
 -------------------------------------------------------------------------------
-
-
-
+Servica Management
+-- systemctl status  postgresql-14.service             (service Nam wie Appache oder PostgreSQL,... ) --> um Staus von einem Service zu bekommen 
+-- Stop                                                   um  eine Servive starten 
+-- start                                                  um eine Service zu stopen
+-- reset                                                  um eine Servive zu restarten 
+--systemctl is-active postgresql-14(ServiceName)           um checken um eine Servive Aktive ist             
+--systemctl is-enabled postgresql-14                       Es zeigt ob eine Service wenn system wird Boot auch automatisch wird aktive oder muss man das Manuel machen
+--cat   /etc/systemd/system/multi-user.target.wants/postgresql-14.service                    Hier wird Cinfiguration File gespeichert
+--grep -i execstart  /etc/systemd/system/multi-user.target.wants/postgresql-14.service       
 ----------------------------------------------------------------------
 --  Packages : 
 -- in .deb Distributions  wie Ubunto Systems verwenden wir apt als Package Manager
