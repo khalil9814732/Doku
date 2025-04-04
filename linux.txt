@@ -190,7 +190,30 @@ Servica Management
 --systemctl is-active postgresql-14(ServiceName)           um checken um eine Servive Aktive ist             
 --systemctl is-enabled postgresql-14                       Es zeigt ob eine Service wenn system wird Boot auch automatisch wird aktive oder muss man das Manuel machen
 --cat   /etc/systemd/system/multi-user.target.wants/postgresql-14.service                    Hier wird Cinfiguration File gespeichert
---grep -i execstart  /etc/systemd/system/multi-user.target.wants/postgresql-14.service       
+--grep -i execstart  /etc/systemd/system/multi-user.target.wants/postgresql-14.service     
+
+	#Process 
+	*Process Type:
+		- Running  Services in Runing
+		-Sleeping  Service die in Sleeping sind 
+		- Zombia Process ist durch aber immer noch in Table sind 
+	*top     die Promt ist wie Task Manager von Windos
+		- pid es zeigt die id von Process
+		- user die Person die es erstellt hat
+		- s 
+			- S --> SLEEPING
+			- I  --> Idle
+	* htop   ist eine benutzerfreundlichere und erweiterte Version von top. Es bietet eine farbige, interaktive Oberfläche und viele Funktionen, die top nicht hat.
+	* free -m   es zeigt mehr info über Rams 
+	* cat /proc/cpuinfo       Über CPU kann man unter File prog/cpuinfo bekommen 
+	* ps aux                  es ist wie top aber es ist nicht dynamic
+		- ps -ef          es zeigt die Parent ID von jede Proces auch 
+		- ps -ef | grep postgresql-14   es zeigt nur prozess von postgresql-14 mit child Prozess 
+		- ps -ef | grep postgresql-14  | awk '{print $1 $2}'  es gibt nur erste columns
+		-  ps -ef | grep postgresql-14  | awk '{print $1 " " $2}'  es gibt nur erste 2 columns
+	* kill  pid   to stop a process   es stopt child und parent processes zusammen 
+		- kill -9 pid nur parent proces wird gestopt. 
+	
 ----------------------------------------------------------------------
 --  Packages : 
 -- in .deb Distributions  wie Ubunto Systems verwenden wir apt als Package Manager
