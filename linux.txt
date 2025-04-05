@@ -5,6 +5,16 @@ cat etc/cpuinfo
 cat /ect/passwd  in diesem File wird 
 ----------------
 cat /proc(cpuinfo
+----
+Welche Tools solte am Anfang instaliert werden 
+*wget
+*curl 
+*whois
+*net-tools
+*tmux
+*nano oder vim
+*dnsuitls
+*netcat
 
 
 --------------------------------
@@ -180,6 +190,8 @@ oder kann man die Users direkt in etc/group hinzufügen
 -- last -1 letzte User, der sich eingelogt hat. 
 --who   zeigt wer ist jetzt eingelogt 
 -- lsof -u gherbran  Es zeigt alle Files die von User geöffnet wurde 
+--------------------------------------------
+Archiving 
 
 -------------------------------------------------------------------------------
 Servica Management
@@ -213,7 +225,17 @@ Servica Management
 		-  ps -ef | grep postgresql-14  | awk '{print $1 " " $2}'  es gibt nur erste 2 columns
 	* kill  pid   to stop a process   es stopt child und parent processes zusammen 
 		- kill -9 pid nur parent proces wird gestopt. 
-	
+---------------------------
+Automatisierung
+- Die Automatiesierung macht man durch command crontab 
+	* crontab -e          -->    Öffne deine Benutzer-Crontab:
+	* In controltab von Benutzer das Zeit von Scheduler + Befehle eintragen 
+		- 0 2 * * *  rm /home/gisdata/gherbran/versadash/versatelROUTE/src/getNextFeature.log
+		- 0(Minuten) 2(Stunden) *(Tag des Monats 1-31) *(Monat 1-12) *(Wochentag)
+	* wq to save vim :q! quit ohne save
+	* grep CRON/var/log/cron
+
+
 ----------------------------------------------------------------------
 --  Packages : 
 -- in .deb Distributions  wie Ubunto Systems verwenden wir apt als Package Manager
@@ -234,8 +256,14 @@ oder vom Internet herunterladen (wget link ) und dann durch dpkg/yum(redhat) -i 
 	wget url 
  	curl url 
 -- Unzipp a File
+	.gz ist es gezippt File
+	file Filename zeigt mit was ein File Compressed
 	unzip te.zip 
 	zip to make zip 
+	tar filename es kompress ein File 
+		- tar -xzvf   file name etwas unzippen 
+		- tar  -czvf file name.gz   um File zippen 
+	ls -ltr zeigt alle zip Files auch mit Datum 
 -- Compare a File
 	cmp file_1 file_2
 -- to Find a File 
