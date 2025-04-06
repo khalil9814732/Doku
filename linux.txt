@@ -5,16 +5,19 @@ cat etc/cpuinfo
 cat /ect/passwd  in diesem File wird 
 ----------------
 cat /proc(cpuinfo
-----
+--------------------------------------
+bind9 --> Das ist eine Service die die Rolle von DNS Server spielt.
 Welche Tools solte am Anfang instaliert werden 
-*wget
-*curl 
-*whois
-*net-tools
-*tmux
-*nano oder vim
-*dnsuitls
-*netcat
+*wget : for download from Internet
+*curl : api test oder download 
+*whois  : to take info über domains 
+*net-tools : um die Situation von einem Netz zu checken
+*tmux : Es gibt die Möglichkeit mehr Terminal gleichzeitig öffnen
+*nano oder vim : für Edit
+*dnsuitls : es gibt die Möglichkeit mit dns zu arbeiten
+*netcat : 1- einen Port zu verbinden 2- Listen zu einem Port 3- File Transfer 4- port scaning
+* git Veränderungen in Files und Projekts kann man beobachten 
+*zsh es ist eine Shell oder Terminal 
 
 
 --------------------------------
