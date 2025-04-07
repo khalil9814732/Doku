@@ -232,6 +232,7 @@ Servica Management
 Automatisierung
 - Die Automatiesierung macht man durch command crontab 
 	* crontab -e          -->    Öffne deine Benutzer-Crontab:
+	* crontab -r                 es löscht alle Tasks
 	* In controltab von Benutzer das Zeit von Scheduler + Befehle eintragen 
 		- 0 2 * * *  rm /home/gisdata/gherbran/versadash/versatelROUTE/src/getNextFeature.log
 		- 0(Minuten) 2(Stunden) *(Tag des Monats 1-31) *(Monat 1-12) *(Wochentag)
