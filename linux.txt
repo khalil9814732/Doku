@@ -235,9 +235,21 @@ Automatisierung
 	* crontab -r                 es löscht alle Tasks
 	* In controltab von Benutzer das Zeit von Scheduler + Befehle eintragen 
 		- 0 2 * * *  rm /home/gisdata/gherbran/versadash/versatelROUTE/src/getNextFeature.log
+		oder a shell File
+		49 13 * * * /home/gisdata/gherbran/routing_api/src/crontab/DeleteGetDistanceByLonLatLogFile.sh
 		- 0(Minuten) 2(Stunden) *(Tag des Monats 1-31) *(Monat 1-12) *(Wochentag)
 	* wq to save vim :q! quit ohne save
-	* grep CRON/var/log/cron
+	* grep -i crond /var/log/cron
+# Switche von crontab 
+	-u  crontab -u UserName -l   Definiert den Benutzer(alice hier), dessen Crontab bearbeitet oder angezeigt werden soll. Nur als Root erlaubt.
+	-e  crontab (-u UserName) -e             Öffnet die Crontab des aktuellen (oder mit -u angegebenen) Benutzers im Editor.
+	-1 crontab (-u UserName) -l              Listet die Crontab des aktuellen oder angegebenen Benutzers auf.
+	-r  crontab -r                           Löscht die Crontab eines Benutzers.
+	-i  crontab -i -r                        Fragt nach, bevor eine Crontab gelöscht wird. Kombinierbar mit -r.
+	-n crontab -n HostName                   Legt fest, auf welchem Cluster-Host die Crontabs ausgeführt werden (eher für große Systeme/Verteilt).
+	-T crontab -T   ./meine_crontab.txt      Testet die angegebene Datei auf Crontab-Syntaxfehler, ohne sie zu installieren.             
+	-V crontab -V                            Gibt die Version von crontab aus und beendet das Programm.
+	-x(mask)  crontab -x sch                 Erlaubt Debugging für bestimmte Module. Nur für Entwickler oder tiefere Fehleranalyse.
 
 
 ----------------------------------------------------------------------
