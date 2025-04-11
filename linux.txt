@@ -251,7 +251,16 @@ Automatisierung
 	-V crontab -V                            Gibt die Version von crontab aus und beendet das Programm.
 	-x(mask)  crontab -x sch                 Erlaubt Debugging für bestimmte Module. Nur für Entwickler oder tiefere Fehleranalyse.
 
+Das Prozess um eine Python File über shell Skript regelmäßig auszuführen:
 
+* Python 
+	- touch file.py
+	- Skript in Python File reinschreiben 
+* Shell Skript
+	- touch file.sh
+	- chmod +x file.sh 
+	- time und phade von python File hinzufügen  20 12 * * *  /file.py
+	
 ----------------------------------------------------------------------
 --  Packages : 
 -- in .deb Distributions  wie Ubunto Systems verwenden wir apt als Package Manager
