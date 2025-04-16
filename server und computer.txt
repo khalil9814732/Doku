@@ -1,0 +1,52 @@
+Server/  Computer Kompenente : 
+
+
+# CPU (Central Processing Unit)
+  -das Gehirn des Computers
+  -Führt alle Rechenoperationen 
+  -Server-CPU
+    -Haben oft 8–64+ Kerne (jede wie ein Mini-Gehirn)
+    -z. B. Intel Xeon, AMD EPYC.
+
+# RAM (Random Access Memory)
+  -Kurzzeitspeicher
+  -Ein schneller, flüchtiger Speicher
+  -wird beim Ausschalten gelöscht
+  -Speichert Daten, mit denen die CPU gerade arbeitet
+  -Je mehr RAM, desto mehr Programme/Vorgänge kann dein System gleichzeitig schnell ausführen.
+  -Server-RAM:
+    -Oft ECC-RAM (Error Correcting Code) – erkennt und korrigiert Speicherfehler automatisch.
+
+# Speicher/ Festplatte 
+  -Langzeitspeicher
+  -SSD oder HDD – speichert dauerhaft alles: Betriebssystem, Dateien, Programme.
+  -Server-Storage:
+    -Nutzt oft RAID für Ausfallsicherheit (z. B. RAID 1 = gespiegelt; RAID 10 = schnell & sicher).
+
+#Netzwerk  
+  -Verbindet den Server mit dem lokalen Netzwerk oder dem Internet.
+ -Server-Netzwerk:
+    -Hat oft mehrere Anschlüsse (1Gbit, 10Gbit oder sogar mehr), auch für Ausfallsicherheit.
+
+# Kühlung & Stromversorgung   :
+  -Verhindern, dass CPU/RAM überhitzen
+  -Netzteile (PSU)  --> Stromversorgung:
+    -Server haben oft 2 Netzteile, damit eins im Notfall übernehmen kann
+ -Redundanz:
+  -Alles doppelt, damit der Betrieb niemals ausfällt
+
+
+#HHD (Hard Disk Drive) oder SSD (Solid State Drive) :
+- HHD : 
+  -Alte, mechanische Festplatte
+  -Langsamer, aber günstiger pro Gigabyte
+  -Empfindlich gegen Erschütterungen
+  -HDD ist wie ein Schallplattenspieler – mechanisch, gut für Archivierung, aber langsam beim Zugriff
+  -Backup oder Archiv → viel Speicher für wenig Geld
+-SSD
+  -Moderne Speicherart, ohne bewegliche Teile
+  -Funktioniert wie ein großer USB-Stick
+  -Extrem schnell im Lesen & Schreiben
+  -Betriebssystem + Datenbank → schneller Zugriff
+  
+
